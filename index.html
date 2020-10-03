@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Firebase App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav  ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" style="display: none;" href="#" id="signin" data-toggle="modal" data-target="#signInModal">SignIn </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link "  style="display: none;" href="#" id="signup" data-toggle="modal" data-target="#signUpModal">SignUp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link "  style="display: none;" href="#" id="logout">LogOut</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+
+    <!--MAIN CONTENT-->
+    <div class="container pt-2">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <ul class="list-group" id="posts">
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Modal SignUp -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="signup-form">
+              <div class="form-group">
+                <label for="signupEmail">Email address</label>
+                <input required type="email" class="form-control" id="signupEmail" placeholder="Ingrese su email"
+                  ria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input required type="password" class="form-control" placeholder="Ingrese su password"
+                  id="signupPassword">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal SignIn-->
+    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="signin-form">
+              <div class="form-group">
+                <label for="signinEmail">Email address</label>
+                <input required type="email" class="form-control" id="signinEmail" placeholder="Ingrese su email"
+                  ria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                <label for="signinPassword">Password</label>
+                <input required type="password" class="form-control" placeholder="Ingrese su password"
+                  id="signinPassword">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+    <!--Firebase scripts-->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDNPkKY8sxftHOxcYZVpEHPZYJH12ucyKo",
+        authDomain: "ionic-autenticacion.firebaseapp.com",
+        databaseURL: "https://ionic-autenticacion.firebaseio.com",
+        projectId: "ionic-autenticacion",
+        storageBucket: "ionic-autenticacion.appspot.com",
+        messagingSenderId: "902787001627",
+        appId: "1:902787001627:web:d289569d047c032d9377be"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const fs = firebase.firestore();
+    </script>
+
+    <script src="./main.js"></script>
+  </body>
+
+</html>
