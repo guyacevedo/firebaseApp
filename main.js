@@ -59,7 +59,7 @@ auth.onAuthStateChanged(function (user) {
         logOut.style.display ='block';
         signIn.style.display ='none';
         signUp.style.display ='none';
-        posts.innerHTML = '';
+        posts.innerHTML = 'Load data...';
         let data = '';
         fs.collection('posts').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -84,6 +84,6 @@ auth.onAuthStateChanged(function (user) {
         logOut.style.display ='none';
         signIn.style.display ='block';
         signUp.style.display ='block';
-        posts.innerHTML = '';
+        posts.innerHTML = '<p class="alert alert-warning" role="alert"> Inicie sesión </p>';
     }
 });
